@@ -28,7 +28,7 @@ OpenBSD i Microsoft Windows. Darcs zawiera skrypt CGI, który mo¿e byæ
 u¿ywany do ogl±dania zawarto¶ci repozytorium.
 
 %prep
-%setup -q -n %{name}-%{version}
+%setup -q
 
 %build
 CPPFLAGS="-I%{_includedir}/ncurses"
