@@ -11,6 +11,7 @@ URL:		http://abridgegame.org/darcs/
 BuildRequires:	curl-devel
 BuildRequires:	ghc >= 6.2
 BuildRequires:	ncurses-devel
+BuildRequires:	readline-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
