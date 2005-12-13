@@ -32,7 +32,7 @@ u¿ywany do ogl±dania zawarto¶ci repozytorium.
 %setup -q
 
 %build
-CPPFLAGS="-I%{_includedir}/ncurses"
+CPPFLAGS="-I/usr/include/ncurses"
 %configure
 %{__make}
 
