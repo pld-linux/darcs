@@ -1,12 +1,12 @@
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
-Version:	1.0.5
+Version:	1.0.6
 Release:	1
 License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://abridgegame.org/darcs/%{name}-%{version}.tar.gz
-# Source0-md5:	9a9a4f84ed5b6258f7ab321713adf20b
+# Source0-md5:	8f3a1ee21b7bfbcca11bf4f9f0042cfd
 URL:		http://abridgegame.org/darcs/
 BuildRequires:	curl-devel
 BuildRequires:	ghc >= 6.2
