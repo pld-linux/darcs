@@ -1,5 +1,5 @@
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
-Summary(pl.UTF-8):   David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
+Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
 Version:	1.0.8
 Release:	1
