@@ -1,5 +1,5 @@
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
-Summary(pl):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
+Summary(pl.UTF-8):   David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
 Version:	1.0.8
 Release:	1
@@ -21,12 +21,12 @@ for CVS. It is written in Haskell, and has been used on Linux, MacOS
 X, FreeBSD, OpenBSD and Microsoft Windows. Darcs includes a CGI
 script, which can be used to view the contents of your repository.
 
-%description -l pl
+%description -l pl.UTF-8
 David's Advanced Revision Control System (zaawansowany system kontroli
 wersji Davida) to jeszcze jeden zamiennik CVS-a. Jest napisany w
-Haskellu, dotychczas by≥ uøywany na Linuksie, MacOS-ie X, FreeBSD,
-OpenBSD i Microsoft Windows. Darcs zawiera skrypt CGI, ktÛry moøe byÊ
-uøywany do ogl±dania zawarto∂ci repozytorium.
+Haskellu, dotychczas by≈Ç u≈ºywany na Linuksie, MacOS-ie X, FreeBSD,
+OpenBSD i Microsoft Windows. Darcs zawiera skrypt CGI, kt√≥ry mo≈ºe byƒá
+u≈ºywany do oglƒÖdania zawarto≈õci repozytorium.
 
 %prep
 %setup -q
