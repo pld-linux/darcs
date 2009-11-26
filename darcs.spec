@@ -1,24 +1,20 @@
-%bcond_without	git
+#
+# TODO:
+# Setup.lhs: At least the following dependencies are missing:
+# hashed-storage >=0.3.8 && <0.4 && >=0.3.8 && <0.4,
+# haskeline >=0.6.1 && <0.7 && >=0.6.1 && <0.7
+#
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
-Version:	1.0.9
-Release:	2
+Version:	2.3.1
+Release:	0.1
 License:	GPL v2
 Group:		Development/Version Control
-Source0:	http://darcs.net/%{name}-%{version}.tar.gz
-# Source0-md5:	07222cd3c500aa31e3332847573a4ab2
+Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
+# Source0-md5:	376e58a09da2c1e5c881eaaa3df455a1
 URL:		http://darcs.net/
-BuildRequires:	autoconf
-BuildRequires:	curl-devel
-%if %{with git}
-BuildRequires:	git-core-devel >= 1.5.2.2-4
-BuildRequires:	openssl-devel
-%endif
 BuildRequires:	ghc >= 6.2
-BuildRequires:	ncurses-devel
-BuildRequires:	readline-devel
-BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,27 +33,13 @@ używany do oglądania zawartości repozytorium.
 %prep
 %setup -q
 
-sed -i -e 's#curses ncurses#tinfo curses ncurses#g' configure.ac
-
 %build
-%{__aclocal}
-%{__autoconf}
-CPPFLAGS="-I/usr/include/ncurses"
-%configure \
-%if %{with git}
-	--enable-git \
-	--with-git-includes="-I%{_includedir}/git-core" \
-%endif
-	--without-wx
-%{__make}
+runhaskell Setup.lhs configure --prefix=%{_prefix}
+runhaskell Setup.lhs build
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/doc/%{name}
+runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
