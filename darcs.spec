@@ -1,11 +1,3 @@
-#
-# TODO:
-# Setup.lhs: At least the following dependencies are missing:
-# hashed-storage >=0.3.8 && <0.4 && >=0.3.8 && <0.4,
-# haskeline >=0.6.1 && <0.7 && >=0.6.1 && <0.7
-# utf8-string ==0.3.* && ==0.3.*,
-# zlib >=0.5.1.0 && <0.6.0.0 && >=0.5.1.0 && <0.6.0.0 && >=0.5.1.0 && <0.6.0.0
-#
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
@@ -17,6 +9,14 @@ Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	169a6d245a33da97b2daa0eda60b28e5
 URL:		http://darcs.net/
 BuildRequires:	ghc >= 6.2
+BuildRequires:	ghc-hashed-storage >= 0.3.8
+BuildRequires:	ghc-haskeline >= 0.6.1
+BuildRequires:	ghc-utf8-string >= 0.3
+BuildRequires:	ghc-zlib >=0.5.1.0
+Requires:	ghc-hashed-storage >= 0.3.8
+Requires:	ghc-haskeline >= 0.6.1
+Requires:	ghc-utf8-string >= 0.3
+Requires:	ghc-zlib >=0.5.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
