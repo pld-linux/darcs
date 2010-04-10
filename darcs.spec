@@ -7,17 +7,19 @@ License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
 # Source0-md5:	169a6d245a33da97b2daa0eda60b28e5
+Patch0:		%{name}-issue1753.patch
 URL:		http://darcs.net/
-BuildRequires:	ghc >= 6.2
+BuildRequires:	curl-devel >= 7.19.1
+BuildRequires:	ghc >= 6.10
 BuildRequires:	ghc-hashed-storage >= 0.3.8
 BuildRequires:	ghc-haskeline >= 0.6.1
+BuildRequires:	ghc-mmap = 1:0.4.1
+BuildRequires:	ghc-terminfo >= 0.3
 BuildRequires:	ghc-utf8-string >= 0.3
-BuildRequires:	ghc-zlib >=0.5.1.0
-Requires:	ghc-hashed-storage >= 0.3.8
-Requires:	ghc-haskeline >= 0.6.1
-Requires:	ghc-utf8-string >= 0.3
-Requires:	ghc-zlib >=0.5.1.0
+BuildRequires:	ghc-zlib >= 0.5.1.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		libsubdir	ghc-%(/usr/bin/ghc --numeric-version)/%{name}-%{version}
 
 %description
 David's Advanced Revision Control System is yet another replacement
@@ -34,21 +36,43 @@ używany do oglądania zawartości repozytorium.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-runhaskell Setup.lhs configure --prefix=%{_prefix}
+runhaskell Setup.lhs configure -v2 \
+	--prefix=%{_prefix} \
+	--libdir=%{_libdir} \
+	--libexecdir=%{_libexecdir} \
+	--libsubdir=%{libsubdir} \
+	--docdir=%{_docdir}/%{name}-%{version} \
+	--flags="curl curl-pipelining terminfo color mmap"
+
 runhaskell Setup.lhs build
+runhaskell Setup.lhs haddock --executables \
+	--css=doc/darcs.css
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/%{name}
+
 runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
+
+# work around automatic haddock docs installation
+rm -rf %{name}-%{version}-doc
+cp -a $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} %{name}-%{version}-doc
+
+install -p contrib/darcs_completion $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/%{name}
+
+# we only want the binary
+rm -r $RPM_BUILD_ROOT/%{_libdir}/%{libsubdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc manual AUTHORS
+%doc NEWS README
+%doc %{name}-%{version}-doc/html
 %attr(755,root,root) %{_bindir}/*
 %{_sysconfdir}/bash_completion.d/%{name}
-%{_mandir}/man?/*
+%{_mandir}/man1/*
