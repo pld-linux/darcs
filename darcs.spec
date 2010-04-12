@@ -2,7 +2,7 @@ Summary:	David's Advanced Revision Control System - yet another replacement for 
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
 Version:	2.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
@@ -34,6 +34,18 @@ Haskellu, dotychczas był używany na Linuksie, MacOS-ie X, FreeBSD,
 OpenBSD i Microsoft Windows. Darcs zawiera skrypt CGI, który może być
 używany do oglądania zawartości repozytorium.
 
+%package -n bash-completion-darcs
+Summary:	bash-completion for darcs
+Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla darcsa
+Group:		Applications/Shells
+Requires:	bash-completion
+
+%description -n bash-completion-darcs
+This package provides bash-completion for darcs.
+
+%description -n bash-completion-darcs -l pl.UTF-8
+Pakiet ten dostarcza bashowe uzupełnianie nazw dla darcsa.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -53,7 +65,6 @@ runhaskell Setup.lhs haddock --executables \
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/%{name}
 
 runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
 
@@ -61,6 +72,8 @@ runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
 rm -rf %{name}-%{version}-doc
 cp -a $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} %{name}-%{version}-doc
 
+# bash completion
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 install -p contrib/darcs_completion $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/%{name}
 
 # we only want the binary
@@ -74,5 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 %doc NEWS README
 %doc %{name}-%{version}-doc/html
 %attr(755,root,root) %{_bindir}/*
-%{_sysconfdir}/bash_completion.d/%{name}
 %{_mandir}/man1/*
+
+%files -n bash-completion-darcs
+%defattr(644,root,root,755)
+%{_sysconfdir}/bash_completion.d/%{name}
