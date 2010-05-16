@@ -17,6 +17,8 @@ BuildRequires:	ghc-mmap = 1:0.4.1
 BuildRequires:	ghc-terminfo >= 0.3
 BuildRequires:	ghc-utf8-string >= 0.3
 BuildRequires:	ghc-zlib >= 0.5.1.0
+BuildRequires:	gmp-devel
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		libsubdir	ghc-%(/usr/bin/ghc --numeric-version)/%{name}-%{version}
