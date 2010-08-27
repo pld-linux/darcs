@@ -1,19 +1,19 @@
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
-Version:	2.4
-Release:	2
+Version:	2.4.4
+Release:	0.1
 License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	169a6d245a33da97b2daa0eda60b28e5
+# Source0-md5:	1ccd97561e4e0592b44f1989cebeca02
 Patch0:		%{name}-issue1753.patch
 URL:		http://darcs.net/
 BuildRequires:	curl-devel >= 7.19.1
-BuildRequires:	ghc >= 6.10
-BuildRequires:	ghc-hashed-storage >= 0.3.8
+BuildRequires:	ghc >= 6.12.3
+BuildRequires:	ghc-hashed-storage >= 0.5
 BuildRequires:	ghc-haskeline >= 0.6.1
-BuildRequires:	ghc-mmap = 1:0.4.1
+BuildRequires:	ghc-mmap >= 1:0.5
 BuildRequires:	ghc-terminfo >= 0.3
 BuildRequires:	ghc-utf8-string >= 0.3
 BuildRequires:	ghc-zlib >= 0.5.1.0
@@ -21,7 +21,7 @@ BuildRequires:	gmp-devel
 BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		libsubdir	ghc-%(/usr/bin/ghc --numeric-version)/%{name}-%{version}
+%define		ghcdir		ghc-%(/usr/bin/ghc --numeric-version)
 
 %description
 David's Advanced Revision Control System is yet another replacement
@@ -50,14 +50,13 @@ Pakiet ten dostarcza bashowe uzupełnianie nazw dla darcsa.
 
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 
 %build
 runhaskell Setup.lhs configure -v2 \
 	--prefix=%{_prefix} \
 	--libdir=%{_libdir} \
 	--libexecdir=%{_libexecdir} \
-	--libsubdir=%{libsubdir} \
 	--docdir=%{_docdir}/%{name}-%{version} \
 	--flags="curl curl-pipelining terminfo color mmap"
 
@@ -79,7 +78,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
 install -p contrib/darcs_completion $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d/%{name}
 
 # we only want the binary
-rm -r $RPM_BUILD_ROOT/%{_libdir}/%{libsubdir}
+rm -r $RPM_BUILD_ROOT/%{_libdir}/%{ghcdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
