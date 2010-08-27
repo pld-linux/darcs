@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without	tests		# build without tests
+#
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
@@ -50,7 +54,7 @@ Pakiet ten dostarcza bashowe uzupełnianie nazw dla darcsa.
 
 %prep
 %setup -q
-#%patch0 -p1
+%patch0 -p1
 
 %build
 runhaskell Setup.lhs configure -v2 \
@@ -61,6 +65,8 @@ runhaskell Setup.lhs configure -v2 \
 	--flags="curl curl-pipelining terminfo color mmap"
 
 runhaskell Setup.lhs build
+%{?with_tests:runhaskell Setup.lhs test}
+
 runhaskell Setup.lhs haddock --executables \
 	--css=doc/darcs.css
 
