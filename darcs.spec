@@ -5,13 +5,15 @@
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
-Version:	2.4.4
-Release:	3
+Version:	2.5.2
+Release:	0.1
 License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	1ccd97561e4e0592b44f1989cebeca02
-Patch0:		%{name}-issue1753.patch
+# Source0-md5:	491b6ca01dec245a16112ad2c7e07dc1
+Patch0:		%{name}-ghc72.patch
+Patch1:		%{name}-relax-regex-libs-deps.patch
+Patch2:		%{name}-tests-ghc72.patch
 URL:		http://darcs.net/
 BuildRequires:	curl-devel >= 7.19.1
 BuildRequires:	ghc >= 6.12.3
@@ -55,6 +57,8 @@ Pakiet ten dostarcza bashowe uzupełnianie nazw dla darcsa.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 runhaskell Setup.lhs configure -v2 \
