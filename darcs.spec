@@ -20,6 +20,7 @@ BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-hashed-storage >= 0.5
 BuildRequires:	ghc-haskeline >= 0.6.1
 BuildRequires:	ghc-mmap >= 1:0.5
+BuildRequires:	ghc-tar >= 0.3
 BuildRequires:	ghc-terminfo >= 0.3
 BuildRequires:	ghc-utf8-string >= 0.3
 BuildRequires:	ghc-zlib >= 0.5.1.0
