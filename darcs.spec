@@ -48,6 +48,9 @@ Summary:	bash-completion for darcs
 Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla darcsa
 Group:		Applications/Shells
 Requires:	bash-completion
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n bash-completion-darcs
 This package provides bash-completion for darcs.
