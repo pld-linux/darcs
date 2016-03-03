@@ -1,28 +1,48 @@
 #
 # Conditional build:
 %bcond_without	tests		# build without tests
-#
+
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
-Version:	2.5.2
-Release:	1
+Version:	2.10.3
+Release:	0.1
 License:	GPL v2
 Group:		Development/Version Control
 Source0:	http://darcs.net/releases/%{name}-%{version}.tar.gz
-# Source0-md5:	491b6ca01dec245a16112ad2c7e07dc1
+# Source0-md5:	0caaeb63253e28fdafecd50413c731d6
 Patch0:		%{name}-ghc72.patch
 Patch1:		%{name}-relax-regex-libs-deps.patch
 Patch2:		%{name}-tests-ghc72.patch
 URL:		http://darcs.net/
 BuildRequires:	curl-devel >= 7.19.1
 BuildRequires:	ghc >= 6.12.3
+BuildRequires:	ghc-attoparsec <0.14
+BuildRequires:	ghc-attoparsec >=0.11
+BuildRequires:	ghc-base16-bytestring < 0.2
+BuildRequires:	ghc-base16-bytestring >= 0.1
+BuildRequires:	ghc-cryptohash <0.12
+BuildRequires:	ghc-cryptohash > =0.4
+BuildRequires:	ghc-data-ordlist < 0.5
+BuildRequires:	ghc-data-ordlist >= 0.4
 BuildRequires:	ghc-hashed-storage >= 0.5
 BuildRequires:	ghc-haskeline >= 0.6.1
 BuildRequires:	ghc-mmap >= 1:0.5
+BuildRequires:	ghc-regex-applicative < 0.4
+BuildRequires:	ghc-regex-applicative >= 0.2
+BuildRequires:	ghc-regex-compat-tdfa < 0.96
+BuildRequires:	ghc-regex-compat-tdfa >= 0.95.1
+BuildRequires:	ghc-sandi < 0.4
+BuildRequires:	ghc-sandi >= 0.2
 BuildRequires:	ghc-tar >= 0.3
 BuildRequires:	ghc-terminfo >= 0.3
+BuildRequires:	ghc-transformers-compat < 0.6
+BuildRequires:	ghc-transformers-compat >= 0.4
+BuildRequires:	ghc-unix-compat < 0.5
+BuildRequires:	ghc-unix-compat >= 0.1.2
 BuildRequires:	ghc-utf8-string >= 0.3
+BuildRequires:	ghc-zip-archive < 0.3
+BuildRequires:	ghc-zip-archive >= 0.2.3
 BuildRequires:	ghc-zlib >= 0.5.1.0
 BuildRequires:	gmp-devel
 BuildRequires:	pkgconfig
@@ -60,9 +80,9 @@ Pakiet ten dostarcza bashowe uzupełnianie nazw dla darcsa.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch0 -p1
+#%patch1 -p1
+#%patch2 -p1
 
 %build
 runhaskell Setup.lhs configure -v2 \
