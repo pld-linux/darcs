@@ -17,8 +17,6 @@ Patch2:		%{name}-tests-ghc72.patch
 URL:		http://darcs.net/
 BuildRequires:	curl-devel >= 7.19.1
 BuildRequires:	ghc >= 6.12.3
-BuildRequires:	ghc-attoparsec <0.14
-BuildRequires:	ghc-attoparsec >=0.11
 BuildRequires:	ghc-base16-bytestring < 0.2
 BuildRequires:	ghc-base16-bytestring >= 0.1
 BuildRequires:	ghc-cryptohash <0.12
