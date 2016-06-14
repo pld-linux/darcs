@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	tests		# build without tests
-#
+
 Summary:	David's Advanced Revision Control System - yet another replacement for CVS
 Summary(pl.UTF-8):	David's Advanced Revision Control System - jeszcze jeden zamiennik CVS-a
 Name:		darcs
@@ -42,6 +42,16 @@ wersji Davida) to jeszcze jeden zamiennik CVS-a. Jest napisany w
 Haskellu, dotychczas był używany na Linuksie, MacOS-ie X, FreeBSD,
 OpenBSD i Microsoft Windows. Darcs zawiera skrypt CGI, który może być
 używany do oglądania zawartości repozytorium.
+
+%package doc
+Summary:	Documentation for darcs
+Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description doc
+The documentation files that come with darcs.
 
 %package -n bash-completion-darcs
 Summary:	bash-completion for darcs
@@ -100,9 +110,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc NEWS README
-%doc %{name}-%{version}-doc/html
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
+
+%files doc
+%defattr(644,root,root,755)
+%doc %{name}-%{version}-doc/html/*
 
 %files -n bash-completion-darcs
 %defattr(644,root,root,755)
