@@ -46,9 +46,7 @@ używany do oglądania zawartości repozytorium.
 %package doc
 Summary:	Documentation for darcs
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description doc
 The documentation files that come with darcs.
@@ -58,9 +56,7 @@ Summary:	bash-completion for darcs
 Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla darcsa
 Group:		Applications/Shells
 Requires:	bash-completion
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description -n bash-completion-darcs
 This package provides bash-completion for darcs.
